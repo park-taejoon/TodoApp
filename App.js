@@ -19,6 +19,6 @@ function App() {
   );
 }
 
-const styles = StyleSheet.create({block: {flex: 1}});
+const styles = StyleSheet.create({block: {flex: 1, backgroundColor: 'white'}});
 
 export default App;
