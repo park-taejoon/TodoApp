@@ -1,17 +1,25 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function TodoItem({id, text, done}) {
+function TodoItem({id, text, done, onToggle}) {
   return (
     <View style={styles.item}>
-      <View style={(styles.circle, done && styles.filled)}>
-        {done && (
-          <Image
-            source={require('../assets/icons/check_white/check_white.png')}
-          />
-        )}
-      </View>
+      <TouchableOpacity onPress={() => onToggle(id)}>
+        <View style={(styles.circle, done && styles.filled)}>
+          {done && (
+            <Image
+              source={require('../assets/icons/check_white/check_white.png')}
+            />
+          )}
+        </View>
+      </TouchableOpacity>
       <Text style={(styles.text, done && styles.lineThrough)}>{text}</Text>
+      {done ? (
+        <Icon name="delete" size={32} color="red" />
+      ) : (
+        <View style={styles.removePlaceholder} />
+      )}
     </View>
   );
 }
@@ -21,6 +29,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     alignItems: 'center',
+  },
+  removePlaceholder: {
+    width: 32,
+    height: 32,
   },
   filled: {
     justifyContent: 'center',
