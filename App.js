@@ -8,7 +8,6 @@ import TodoList from './components/TodoList';
 
 function App() {
   const today = new Date();
-  console.log(today);
 
   const [todos, setTodos] = useState([
     {id: 1, text: '작업 환경 설정', done: true},
@@ -16,7 +15,7 @@ function App() {
     {id: 3, text: '투두리스트 만들어보기', done: false},
   ]);
 
-  const onInsert = text => {
+  const onInsert = function (text) {
     const nextId =
       todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
 
@@ -38,7 +37,7 @@ function App() {
             style={styles.avoid}>
             <DateHead date={today} />
             {todos.length === 0 ? <Empty /> : <TodoList todos={todos} />}
-            <AddTodo />
+            <AddTodo onInsert={onInsert} />
           </KeyboardAvoidingView>
         </SafeAreaView>
       </SafeAreaProvider>
